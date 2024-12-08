@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Booking and Your Bookings</title>
+    <style>
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-blue-100 via-gray-50 to-gray-100 min-h-screen">
+
+    <!-- Booking Form Section -->
+    <div class="py-12 px-6">
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Book a Vehicle</h1>
+
+            <div class="space-y-8">
+                <!-- Vehicle Selection -->
+                <div>
+                    <label for="vehicle" class="block text-lg font-medium text-gray-700 mb-2">Select Vehicle</label>
+                    <select
+                        id="vehicle"
+                        [(ngModel)]="selectedVehicle"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 px-4 py-2"
+                    >
+                        <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">
+                            {{ vehicle.Model }}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Date Pickers -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="pickupDate" class="block text-lg font-medium text-gray-700 mb-2">Pickup Date</label>
+                        <input
+                            id="pickupDate"
+                            type="date"
+                            [(ngModel)]="pickupDate"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
+                        />
+                    </div>
+                    <div>
+                        <label for="returnDate" class="block text-lg font-medium text-gray-700 mb-2">Return Date</label>
+                        <input
+                            id="returnDate"
+                            type="date"
+                            [(ngModel)]="returnDate"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-500"
+                        />
+                    </div>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-sm">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Booking Summary</h2>
+                    <p class="text-gray-700">
+                        Vehicle: <span class="font-semibold">{{ selectedVehicle?.Model || 'None Selected' }}</span>
+                    </p>
+                    <p class="text-gray-700">
+                        Pickup Date: <span class="font-semibold">{{ pickupDate || 'Not Selected' }}</span>
+                    </p>
+                    <p class="text-gray-700">
+                        Return Date: <span class="font-semibold">{{ returnDate || 'Not Selected' }}</span>
+                    </p>
+                    <p class="text-gray-700">
+                        Total Price: 
+                        <span class="font-semibold">
+                            {{ calculatePrice() ? (calculatePrice() | currency: 'USD') : 'Unavailable' }}
+                        </span>
+                    </p>
+                </div>
+
+                <!-- Confirm Button -->
+                <button
+                    (click)="confirmBooking()"
+                    class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition"
+                >
+                    Confirm Booking
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Your Bookings Section -->
+    <div class="py-12 px-6 bg-gray-50">
+        <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Your Bookings</h1>
+
+            <!-- Bookings List -->
+            <div *ngIf="bookings.length > 0; else noBookings" class="space-y-8">
+                <div *ngFor="let booking of bookings" class="card bg-gray-100 rounded-lg p-6 shadow-md">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            {{ booking.vehicle.Model }}
+                        </h2>
+                        <span
+                            class="text-sm font-medium px-4 py-1 rounded-lg"
+                            [ngClass]="{
+                                'bg-green-100 text-green-700': booking.status === 'Confirmed',
+                                'bg-yellow-100 text-yellow-700': booking.status === 'Pending',
+                                'bg-red-100 text-red-700': booking.status === 'Cancelled'
+                            }"
+                        >
+                            {{ booking.status }}
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mt-2">Pickup: {{ booking.pickupDate }}</p>
+                    <p class="text-gray-600">Return: {{ booking.returnDate }}</p>
+                    <p class="text-gray-600">Total Price: {{ booking.totalPrice | currency }}</p>
+                    <div class="flex space-x-4 mt-6">
+                        <button
+                            *ngIf="booking.status === 'Confirmed'"
+                            (click)="cancelBooking(booking.id)"
+                            class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                        >
+                            Cancel Booking
+                        </button>
+                        <button
+                            *ngIf="booking.status === 'Pending'"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                        >
+                            Modify Booking
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Bookings Message -->
+            <ng-template #noBookings>
+                <div class="text-center text-gray-600 mt-6">
+                    <p class="text-lg">You have no bookings yet.</p>
+                    <a routerLink="/vehicle-search" class="text-blue-600 hover:underline">
+                        Book a vehicle now
+                    </a>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 text-gray-800 min-h-screen">
+    <!-- Header Section -->
+    <div class="container mx-auto px-6 py-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-4xl font-extrabold text-indigo-600">Admin Dashboard</h1>
+                <h2 class="text-xl font-medium text-gray-700">Your Vehicle Rental System Headquarters</h2>
+            </div>
+            <button 
+                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full shadow-md transition duration-300" 
+                (click)="logout()">
+                    Logout
+                </button>
+
+        </div>
+        <p class="mt-4 text-sm text-gray-600">Welcome to the central hub for managing your vehicle rental system. Stay informed with real-time insights and streamline your administrative tasks.</p>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="container mx-auto px-6 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl">
+                <img class="w-full h-48 object-cover" src="https://images.pexels.com/photos/638479/pexels-photo-638479.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Team Facility">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-indigo-600">Team Facility</h3>
+                    <p class="text-gray-600 mt-2">Explore the facilities, our robust booking system, and much more.</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl">
+                <img class="w-full h-48 object-cover" src="https://images.pexels.com/photos/758744/pexels-photo-758744.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vehicle Overview">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-indigo-600">Vehicle Overview</h3>
+                    <p class="text-gray-600 mt-2">Manage and review vehicles in our fleet, including support tickets and bookings.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl">
+                <img class="w-full h-48 object-cover" src="https://images.pexels.com/photos/248747/pexels-photo-248747.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Trusted Brand">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-indigo-600">Trusted Brand Among Customers</h3>
+                    <p class="text-gray-600 mt-2">India's trusted VRS system, customized for your needs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Responsive Behavior for Embedded Angular Components -->
+        <app-booking-manage></app-booking-manage>
+        <app-user-manage></app-user-manage>
+        <app-reports></app-reports>
+        <app-tickets></app-tickets>
+        <app-footer></app-footer>
+
+</body>
+</html>

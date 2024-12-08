@@ -1,0 +1,74 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+FrontEnd/node_modules/
+/dist/
+/coverage/
+FrontEnd/angular-out/
+
+node_modules
+BackEnd/node_modules
+
+Architecture.txt
+
+# Environment files
+.env
+.env.*.local
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Angular specific
+FrontEnd/.angular/cache/
+FrontEnd/.angular/
+/out-tsc/
+/.fusebox/
+
+# Build artifacts and temporary files
+/build/
+/tmp/
+/*.tsbuildinfo
+/target/
+/public/
+
+# IDE files
+.idea/
+/FrontEnd/.vscode/
+*.swp
+*.swo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Testing
+/coverage/
+*.lcov
+
+# Angular build files
+*.map
+*.ngfactory.ts
+*.ngsummary.json
+
+# Production build output
+/server-dist/
+
+# Git specific
+!.gitignore

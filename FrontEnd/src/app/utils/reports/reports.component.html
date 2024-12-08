@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-8 bg-white rounded-lg shadow-xl mt-12">
+        <!-- Header Section -->
+        <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-8">Submit Vehicle Report</h1>
+
+        <!-- Grid Layout for Image and Form -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Image Section -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="https://images.pexels.com/photos/13861/IMG_3496bfree.jpg?auto=compress&cs=tinysrgb&w=600" alt="Vehicle" class="w-full h-64 object-cover transition-transform duration-300 hover:scale-105">
+            </div>
+
+            <!-- Form Section -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Report a Vehicle</h2>
+
+                <!-- Form -->
+                <form (ngSubmit)="submitReport()">
+                    <!-- Model Number -->
+                    <div class="mb-6">
+                        <label for="vehicleModel" class="block text-gray-700 text-sm font-semibold mb-2">Vehicle Model Number</label>
+                        <input type="text" id="vehicleModel" class="shadow-md border-2 border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                               [(ngModel)]="modelNumber" name="vehicleModel" placeholder="Enter Model Number" />
+                    </div>
+
+                    <!-- Make -->
+                    <div class="mb-6">
+                        <label for="make" class="block text-gray-700 text-sm font-semibold mb-2">Make</label>
+                        <input type="text" id="make" class="shadow-md border-2 border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                               [(ngModel)]="make" name="make" placeholder="Enter Make" />
+                    </div>
+
+                    <!-- Review -->
+                    <div class="mb-6">
+                        <label for="review" class="block text-gray-700 text-sm font-semibold mb-2">Review</label>
+                        <textarea id="review" rows="5" class="shadow-md border-2 border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                                  [(ngModel)]="comments" name="review" placeholder="Write your review here..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-200 hover:scale-105">
+                        Submit Report
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Recent Reports Section -->
+        <div class="mt-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Recent Reports</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-lg rounded-lg">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-3 px-6 text-left text-xs font-semibold text-gray-600 uppercase">Model Number</th>
+                            <th class="py-3 px-6 text-left text-xs font-semibold text-gray-600 uppercase">Make</th>
+                            <th class="py-3 px-6 text-left text-xs font-semibold text-gray-600 uppercase">Review</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through reports using *ngFor -->
+                        <tr *ngFor="let report of reports" class="hover:bg-gray-50 transition-all duration-300">
+                            <td class="py-4 px-6 border-b text-sm text-gray-600">{{ report.modelNumber }}</td>
+                            <td class="py-4 px-6 border-b text-sm text-gray-600">{{ report.make }}</td>
+                            <td class="py-4 px-6 border-b text-sm text-gray-600">{{ report.Comments }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

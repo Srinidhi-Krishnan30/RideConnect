@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Management</title>
+</head>
+<body>
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl font-bold text-center text-white mb-8">Vehicle Management</h1>
+        <div class="grid grid-cols-1 gap-4">
+            <button button (click)="addVehicle()"class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 10-2.828 2.828L15.168 11l-4.707 4.707a2 2 0 002.828 2.828L19 13.828 11 5.828z" />
+                    </svg>
+                    Add Vehicle
+                </span>
+            </button>
+            <button button (click)="editVehicle()"class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 10-2.828 2.828L15.168 11l-4.707 4.707a2 2 0 002.828 2.828L19 13.828 11 5.828z" />
+                    </svg>
+                    Edit Vehicle
+                </span>
+            </button>
+            <button button (click)="viewVehicles()"class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <span class="flex items-center">
+                    <svg xmlns ="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3V3z" />
+                    </svg>
+                    View Vehicles
+                </span>
+            </button>
+            <button button (click)="removeVehicle()"class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 10-2.828 2.828L15.168 11l-4.707 4.707a2 2 0 002.828 2.828L19 13.828 11 5.828z" />
+                    </svg>
+                    Remove Vehicle
+                </span>
+            </button>
+        </div>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="bg-gray-200 rounded-lg shadow-lg p-4">
+                <h3 class="text-lg font-semibold mb-2">Sedan</h3>
+                <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="Sedan" class="w-full h-32 rounded-md object-cover mb-2">
+                <p class="text-gray-700">A comfortable sedan perfect for city driving and long trips.</p>
+                
+            </div>
+            <div class="bg-gray-200 rounded-lg shadow-lg p-4">
+                <h3 class="text-lg font-semibold mb-2">SUV</h3>
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="SUV" class="w-full h-32 rounded-md object-cover mb-2">
+                <p class="text-gray-700">Spacious and versatile, ideal for families and adventures.</p>
+                
+            </div>
+            <div class="bg-gray-200 rounded-lg shadow-lg p-4">
+                <h3 class="text-lg font-semibold mb-2">Truck</h3>
+                <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="Truck" class="w-full h-32 rounded-md object-cover mb-2">
+                <p class="text-gray-700">A powerful truck for heavy-duty tasks and off-road capabilities.</p>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

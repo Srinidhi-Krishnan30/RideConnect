@@ -1,0 +1,9 @@
+.p {
+    color: #155724; /* Example: green color for success messages */
+    background-color: #d4edda; /* Light green background */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+  }
+  

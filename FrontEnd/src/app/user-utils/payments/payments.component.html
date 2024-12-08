@@ -1,0 +1,50 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto bg-white rounded-lg shadow p-6">
+      <!-- Header -->
+      <h1 class="text-2xl font-bold text-gray-800 mb-4">Your Payments</h1>
+  
+      <!-- Payments List -->
+      <div *ngIf="payments.length > 0; else noPayments" class="space-y-6">
+        <div *ngFor="let payment of payments" class="bg-gray-100 rounded-lg p-4 shadow">
+          <div class="flex justify-between items-center">
+            <h2 class="text-lg font-semibold text-gray-800">
+              Payment for {{ payment.booking.vehicle.name }}
+            </h2>
+            <span
+              class="text-sm font-medium px-3 py-1 rounded-lg"
+              [ngClass]="{
+                'bg-green-100 text-green-700': payment.status === 'Completed',
+                'bg-yellow-100 text-yellow-700': payment.status === 'Pending',
+                'bg-red-100 text-red-700': payment.status === 'Failed'
+              }"
+            >
+              {{ payment.status }}
+            </span>
+          </div>
+          <p class="text-gray-600">Amount: {{ payment.amount | currency }}</p>
+          <p class="text-gray-600">Date: {{ payment.date | date: 'medium' }}</p>
+          <p class="text-gray-600">Payment Method: {{ payment.method }}</p>
+          <div class="mt-4">
+            <button
+              *ngIf="payment.status === 'Pending'"
+              (click)="retryPayment(payment.id)"
+              class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition"
+            >
+              Retry Payment
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- No Payments Message -->
+      <ng-template #noPayments>
+        <div class="text-center text-gray-600 mt-6">
+          <p class="text-lg">You have no payment history yet.</p>
+          <a routerLink="/vehicle-search" class="text-blue-600 hover:underline">
+            Book a vehicle and make a payment
+          </a>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  

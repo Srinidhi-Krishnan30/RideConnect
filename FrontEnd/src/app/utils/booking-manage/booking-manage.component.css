@@ -1,0 +1,5 @@
+/* Assuming this is in the component's CSS file (e.g., booking-manage.component.css) */
+.overdue {
+    background-color: #fef2f2;  /* Light red background */
+    color: #e53e3e;  /* Dark red text color */
+}

@@ -1,0 +1,72 @@
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Active Bookings: Fuel Your Rental Business</h1>
+
+    <div class="flex justify-between items-center mb-6">
+        <div class="ml-auto">
+            <button (click)="toggleBookingForm()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transform transition-all hover:scale-105">New Booking</button>
+        </div>
+    </div>
+    
+
+    <!-- New Booking Form (Initially Hidden) -->
+    <div *ngIf="isBookingFormVisible" class="mb-8 p-8 bg-white shadow-xl rounded-lg transition-all transform scale-100 hover:scale-105">
+        <h3 class="text-2xl font-semibold text-gray-800 mb-6">New Booking</h3>
+        <form (ngSubmit)="onSubmitBooking()" #bookingForm="ngForm">
+            <div class="mb-6">
+                <label for="vehicleName" class="block text-sm font-semibold text-gray-700">Vehicle Name</label>
+                <input id="vehicleName" name="vehicleName" [(ngModel)]="newBooking.VehicleName" type="text" class="mt-2 p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 w-full" required />
+            </div>
+
+            <div class="mb-6">
+                <label for="pickupDate" class="block text-sm font-semibold text-gray-700">Pickup Date</label>
+                <input id="pickupDate" name="pickupDate" [(ngModel)]="newBooking.PickupDate" type="date" class="mt-2 p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 w-full" required />
+            </div>
+
+            <div class="mb-6">
+                <label for="returnDate" class="block text-sm font-semibold text-gray-700">Return Date</label>
+                <input id="returnDate" name="returnDate" [(ngModel)]="newBooking.ReturnDate" type="date" class="mt-2 p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 w-full" required />
+            </div>
+
+            <div class="mb-6">
+                <label for="status" class="block text-sm font-semibold text-gray-700">Status</label>
+                <select id="status" name="status" [(ngModel)]="newBooking.Status" class="mt-2 p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 w-full" required>
+                    <option value="Active">Active</option>
+                    <option value="Overdue">Overdue</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+            <div class="mb-6 text-center">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all transform hover:scale-105">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <p class="mb-6 text-gray-700 text-center text-xl font-semibold">View and manage all active vehicle reservations in one place. Track bookings in real-time and update statuses as needed.</p>
+
+    <!-- Booking Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-lg rounded-lg">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Vehicle</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pickup Date</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Return Date</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let booking of bookings" [ngClass]="{'bg-red-100': booking.Status === 'Overdue'}" class="hover:bg-gray-50">
+                    <td class="px-6 py-4 border-b border-gray-200">{{ booking.VehicleName }}</td>
+                    <td class="px-6 py-4 border-b border-gray-200">{{ booking.PickupDate | date: 'yyyy-MM-dd' }}</td>
+                    <td class="px-6 py-4 border-b border-gray-200">{{ booking.ReturnDate | date: 'yyyy-MM-dd' }}</td>
+                    <td class="px-6 py-4 border-b border-gray-200">{{ booking.Status }}</td>
+                    <td class="px-6 py-4 border-b border-gray-200">
+                        <button (click)="cancelBooking(booking)" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-full shadow-md">Cancel</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

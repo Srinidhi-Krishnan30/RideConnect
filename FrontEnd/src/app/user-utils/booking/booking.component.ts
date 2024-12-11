@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component, OnInit } from '@angular/core';
 import { BookingService } from '../../services/booking.service';  // Adjust path if necessary
 import { FormsModule } from '@angular/forms';
@@ -12,31 +13,31 @@ import { CommonModule } from '@angular/common';
 })
 export class BookingComponent implements OnInit {
   // Variables for booking form
-  selectedVehicle: any = null;  // Initialize to null
+  selectedVehicle: any = null; 
   pickupDate: string = '';
   returnDate: string = '';
-  vehicles: any[] = [];  // Array to hold vehicles
+  vehicles: any[] = []; 
   bookings: any[] = [];
 
-  constructor(private bookingService: BookingService) {}  // Inject the BookingService
+  constructor(private bookingService: BookingService) {} 
 
   ngOnInit(): void {
-    this.fetchVehicles();  // Fetch vehicles on component initialization
+    this.fetchVehicles();  
   }
 
-  // Fetch vehicles using the service
+  // 2. Fetch vehicles
   fetchVehicles(): void {
     this.bookingService.getVehicles().subscribe(
       (data) => {
-        this.vehicles = data;  // Update the vehicles array with the response
+        this.vehicles = data;  
       },
       (error) => {
-        console.error('Error fetching vehicles:', error);  // Handle error
+        console.error('Error fetching vehicles:', error);  
       }
     );
   }
 
-  // Calculate price based on vehicle and dates
+  // 3. Calculate price based on vehicle and dates
   calculatePrice(): number {
     if (!this.selectedVehicle || !this.pickupDate || !this.returnDate) {
       return 0;
@@ -61,7 +62,7 @@ export class BookingComponent implements OnInit {
     return days * this.selectedVehicle.PricePerDay;
   }
 
-  // Confirm booking and send data to backend
+  // 4. Confirm booking
   confirmBooking(): void {
     if (!this.selectedVehicle || !this.pickupDate || !this.returnDate) {
       alert('Please complete all fields!');
@@ -73,13 +74,13 @@ export class BookingComponent implements OnInit {
       pickupDate: this.pickupDate,
       returnDate: this.returnDate,
       totalPrice: this.calculatePrice(),
-      status: 'Confirmed', // Default status for new bookings
+      status: 'Confirmed',
     };
   
-    // Add the new booking to the `bookings` array
+    
     this.bookings.push({
       ...bookingData,
-      id: Date.now(), // Use a unique ID for frontend purposes
+      id: Date.now(), 
     });
   
     alert('Booking confirmed!');
@@ -87,7 +88,7 @@ export class BookingComponent implements OnInit {
   
   
 
-  // Cancel a booking
+  // 5. Cancel a booking
   cancelBooking(id: number): void {
     const booking = this.bookings.find((b) => b.id === id);
     if (booking) {

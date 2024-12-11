@@ -1,7 +1,7 @@
+// 1. Imports and config
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Import CommonModule
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-review',
   standalone: true,
@@ -33,6 +33,8 @@ export class ReviewComponent {
   rating: number = 0;
   reviewText: string = '';
 
+  // 2. Submit the review
+
   submitReview() {
     if (this.selectedVehicle && this.rating && this.reviewText) {
       const newReview = {
@@ -41,8 +43,6 @@ export class ReviewComponent {
         text: this.reviewText,
       };
       this.reviews.push(newReview);
-
-      // Reset form fields
       this.selectedVehicle = null;
       this.rating = 0;
       this.reviewText = '';

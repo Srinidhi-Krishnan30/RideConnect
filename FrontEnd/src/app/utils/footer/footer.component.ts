@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
+  // 2. Navigation Button
   scrollToTop() {
     window.scrollTo({
       top: 0,

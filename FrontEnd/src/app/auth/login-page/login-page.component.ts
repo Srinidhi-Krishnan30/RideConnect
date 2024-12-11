@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component,OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,14 +13,16 @@ import { ChangeDetectorRef } from '@angular/core';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
 })
+
+// 2. Configure variables
 export class LoginPageComponent{
   username: string = '';
   password: string = '';
   confirmPassword: string = '';
   email: string = '';
-  userId: string = '';  // You can generate this or let the user enter
-  role: string = ''; // Default role
-  isActive: boolean = true; // Default value
+  userId: string = '';  
+  role: string = '';
+  isActive: boolean = true;
   isLogin: boolean = true;
   message: string = '';
   isLoggedIn: boolean = false;
@@ -28,7 +31,7 @@ export class LoginPageComponent{
   constructor(private http:HttpClient,private router: Router,private cdr: ChangeDetectorRef) {}
   
   
-  
+  // 3.Utility functions
   onSubmit() {
     if (this.isLogin) {
       this.login();
@@ -36,24 +39,22 @@ export class LoginPageComponent{
       this.register();
     }
   }
-  // FACILITATE LOGIN FEATURE
+
   private login() {
     
     this.http.post(`${this.baseUrl}/login`, { 
       username: this.username, 
       password: this.password,
     }).subscribe({
-      // retrieve backend response
       next: (response: any) => {
-        //console.log('Login successful', response);
         const token = response.token;  
         const role = response.user.role;   
         
-        console.log(token);                                    //the session token is present in this place
+        console.log(token);                                    
         
        
       if (token) {
-        localStorage.setItem('token', token);  // Store token in localStorage
+        localStorage.setItem('token', token);  
       }
       
         this.isLoggedIn = true;
@@ -64,7 +65,7 @@ export class LoginPageComponent{
         
 
       if(this.role == "admin"){
-        this.router.navigate(['/admin']); // Navigate to admin page
+        this.router.navigate(['/admin']); 
         }else{this.router.navigate(['/user']);}
       },
 
@@ -106,7 +107,7 @@ export class LoginPageComponent{
     });
 }
 logout() {
-  localStorage.removeItem('token');  // Example if you use localStorage to store the token
+  localStorage.removeItem('token');  
   this.isLoggedIn = false;
   this.router.navigate(['/']);
 }

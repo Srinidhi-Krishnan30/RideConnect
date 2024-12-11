@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';

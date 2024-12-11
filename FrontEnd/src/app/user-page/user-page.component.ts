@@ -1,9 +1,10 @@
+// 1. Imports and config
 import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-//Component specific imports
+// 2. Component specific imports
 import { VehicleSearchComponent } from '../user-utils/vehicle-search/vehicle-search.component';
 import { BookingComponent } from '../user-utils/booking/booking.component';
 import { PaymentsComponent } from '../user-utils/payments/payments.component';
@@ -26,7 +27,7 @@ import { SupportTicketComponent } from '../user-utils/support-ticket/support-tic
 export class UserPageComponent {
   constructor(private router: Router) {}
 
-  // Logout method
+  // 3. Utility methods
   logout() {
     console.log('Logging out...');
     localStorage.removeItem('token');

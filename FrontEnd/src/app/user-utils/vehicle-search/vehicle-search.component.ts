@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; 
@@ -24,19 +25,20 @@ export interface Vehicle {
   
 })
 
+
 export class VehicleSearchComponent implements OnInit {
-  vehicles: Vehicle[] = [];  // Explicitly typed as an array of Vehicle objects
-  filteredVehicles: Vehicle[] = [];  // Explicitly typed as an array of Vehicle objects
+  vehicles: Vehicle[] = [];
+  filteredVehicles: Vehicle[] = []; 
   searchTerm: string = '';
 
   constructor(private bookingService: BookingService) {}
 
   ngOnInit(): void {
-    // Fetch vehicles data on component initialization
+   
     this.bookingService.getVehicles().subscribe(
-      (data: Vehicle[]) => {  // Type the response data as an array of Vehicle objects
+      (data: Vehicle[]) => {  
         this.vehicles = data;
-        this.filteredVehicles = data;  // Initially display all vehicles
+        this.filteredVehicles = data;  
       },
       (error) => {
         console.error('Error fetching vehicles:', error);
@@ -44,8 +46,8 @@ export class VehicleSearchComponent implements OnInit {
     );
   }
 
+    // 2. Filtering vehicles based on given search criteria
   filterVehicles(): void {
-    // Filter vehicles based on the search term
     if (!this.searchTerm) {
       this.filteredVehicles = this.vehicles;
     } else {

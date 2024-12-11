@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 
@@ -8,6 +9,7 @@ import { CommonModule } from '@angular/common'; // Import CommonModule
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.css'],
 })
+// 2. Dummy Data initialization
 export class PaymentsComponent {
   payments = [
     {
@@ -36,6 +38,7 @@ export class PaymentsComponent {
     },
   ];
 
+  // 3. Utility function for failed payments
   retryPayment(id: number) {
     const payment = this.payments.find((p) => p.id === id);
     if (payment) {

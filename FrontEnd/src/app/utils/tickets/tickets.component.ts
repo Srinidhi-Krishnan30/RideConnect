@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgIf,NgFor } from '@angular/common';
@@ -15,7 +16,7 @@ export class TicketsComponent {
   error: string | null = null;
 
   constructor(private http: HttpClient) {
-    // Direct API call in the constructor
+    // 2. Get list of tickets
     this.http.get<any[]>('http://localhost:3000/admin/api/tickets').subscribe({
       next: (data) => {
         this.tickets = data;
@@ -28,6 +29,7 @@ export class TicketsComponent {
       }
     });
   }
+  // 3. Resolve a ticket
   resolveTicket(ticket: any) {
     ticket.Status = 'Closed';
   }

@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
@@ -20,19 +21,20 @@ export class ReportsComponent{
 
   constructor(private http: HttpClient) {}
 
+  // 2. Fetch all available reports
   fetchReports() {
     this.http.get<any[]>('http://localhost:3000/admin/api/reports').subscribe(
       (data) => {
-        this.reports = data; // Store the response data in the reports array
+        this.reports = data; 
       },
       (error) => {
-        console.error('Error fetching reports', error); // Log error if any
+        console.error('Error fetching reports', error);
       }
     );
     console.log(this.reports);
   }
 
-  // Function to submit the report
+  // 3. Function to submit the report
   submitReport(): void {
     const reportData = {
       modelNumber: this.modelNumber,

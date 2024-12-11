@@ -1,3 +1,4 @@
+// 1. Imports and config
 import { Component,OnInit } from '@angular/core';
 import { NgFor ,NgIf} from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +14,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './booking-manage.component.css'
 })
 export class BookingManageComponent implements OnInit{
-  isBookingFormVisible: boolean = false;  // Toggle visibility of the form
+  isBookingFormVisible: boolean = false;  
   newBooking: any = {
     VehicleName: '',
     PickupDate: '',
@@ -23,6 +24,7 @@ export class BookingManageComponent implements OnInit{
   bookings: any[] = [];
 
   constructor(private http: HttpClient) {}
+  // 2. Enable booking form visibility
   toggleBookingForm() {
     this.isBookingFormVisible = !this.isBookingFormVisible;
   }
@@ -32,6 +34,7 @@ export class BookingManageComponent implements OnInit{
     this.fetchBookings(); 
   }
 
+    // 3. Fetch the list of bookings
   fetchBookings(): void {
     this.http.get<any[]>('http://localhost:3000/admin/api/bookings')
       .subscribe(
@@ -44,6 +47,7 @@ export class BookingManageComponent implements OnInit{
       );
       console.log(this.bookings);
     }
+    // 4. Submit a booking
     onSubmitBooking() {
       console.log(this.newBooking);
       this.http.post('http://localhost:3000/admin/api/bookings', this.newBooking)
@@ -57,10 +61,12 @@ export class BookingManageComponent implements OnInit{
           console.error('Error creating booking:', error);
         });
     }
+    // 5. Cancel a booking
     cancelBooking(bookingToCancel : any) {
       // Remove the canceled booking from the list
       this.bookings = this.bookings.filter(booking => booking !== bookingToCancel);
   }
+  // 6. Retrieve all bookings
     loadBookings() {
       this.http.get('http://localhost:3000/admin/api/bookings')
         .subscribe((data: any) => {

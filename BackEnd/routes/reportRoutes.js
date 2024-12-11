@@ -1,3 +1,4 @@
+// 1. Imports and config
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const Review = require("../models/reviewModel.js");
@@ -13,24 +14,23 @@ router.post('/', async (req, res) => {
     }
   
     try {
-      // Create a new review
       const newReview = new Review({
         ReviewId: uuidv4(),  // Generate a unique ID for the review
         modelNumber: modelNumber,
         make: make,
         Comments: comments,
       });
-  
-      // Save the review to the database
       await newReview.save();
       
-      // Respond with a success message
+      // Success message response
       res.status(201).json({ message: 'Review added successfully', review: newReview });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error adding review', error });
     }
   });
+
+  // 2. Fetch all reviews
   router.get('/', async (req, res) => {
     try {
       const reviews = await Review.find();  
@@ -40,6 +40,4 @@ router.post('/', async (req, res) => {
       res.status(500).send('Error fetching reports');
     }
   });
-
-  // Export the router
 module.exports = router;

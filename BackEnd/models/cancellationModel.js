@@ -1,3 +1,4 @@
+// 3. Schema to hold list of cancellations 
 const mongoose = require('mongoose');
 
 const CancellationsSchema = new mongoose.Schema({

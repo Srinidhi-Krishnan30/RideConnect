@@ -1,3 +1,4 @@
+// 1. Imports and config
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
@@ -5,18 +6,17 @@ const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 const User = require('../models/userModel');  
 
-// 1. Fetch all users
+// 2. Fetch all users
 router.get('/', async (req, res) => {
   try {
     const users = await User.find();
-    //const users = await User.find({ role: 'user' });  // Get all users from the database
-    res.status(200).json(users);  // Return users
+    res.status(200).json(users);  
   } catch (error) {
     res.status(500).json({ message: 'Error fetching users', error });
   }
 });
 
-// 2 .Add  a new user
+// 3 .Add  a new user
 router.post('/', async (req, res) => {
   const { username, email, password, role } = req.body;
   
@@ -29,8 +29,8 @@ router.post('/', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       userId: userId,
-      username: username,        // Assign 'name' to 'username'
-      passwordHash: hashedPassword,  // Correct field name to 'passwordHash'
+      username: username,        
+      passwordHash: hashedPassword,  
       role: role,
       email: email,
     });
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 });
 
 
-// 3. Update user information
+// 4. Update user information
 router.put('/', async (req, res) => {
   const { username, newRole } = req.body;
   try {
@@ -65,8 +65,7 @@ router.put('/', async (req, res) => {
 });
 
 
-// 4. Delete a user by username
-// In your backend file (e.g., routes.js or userRoutes.js)
+// 5. Delete a user by username
 router.delete('/:username', async (req, res) => {
   const { username } = req.params;
 
@@ -85,7 +84,7 @@ router.delete('/:username', async (req, res) => {
 
 
 
-// 5. Change user role (specific route to change user role)
+// 6. Change user role 
 router.put('/users/:id/role', async (req, res) => {
   const { id } = req.params;
   const { role } = req.body;

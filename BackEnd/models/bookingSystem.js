@@ -1,3 +1,4 @@
+// 2. Schema to hold list of current bookings
 const mongoose = require('mongoose');
 
 const BookingsSchema = new mongoose.Schema({  

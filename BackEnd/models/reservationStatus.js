@@ -1,3 +1,4 @@
+// 8. Schema to hold the status of each booking
 const mongoose = require('mongoose');
 
 const ReservationStatusSchema = new mongoose.Schema({

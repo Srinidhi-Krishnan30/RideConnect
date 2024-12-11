@@ -1,3 +1,4 @@
+// 9. Schema to hold vehicle reviews
 const mongoose = require('mongoose');
 
 const ReviewsSchema = new mongoose.Schema({

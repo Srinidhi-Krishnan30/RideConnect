@@ -1,3 +1,4 @@
+// Establish a connection to MongoDB server
 const mongoose = require("mongoose");
 const connect_URI = "mongodb://localhost:27017/VechicleRent";
 

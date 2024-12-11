@@ -1,34 +1,36 @@
+// 7. Schema to hold the renting history of each vehicle
+
 const mongoose = require('mongoose');
 
 const rentalHistorySchema = new mongoose.Schema({
   HistoryId: {
     type: String,
     required: true,
-    unique: true, // Ensures each HistoryId is unique
+    unique: true,
   },
   CustomerId: {
-    type: mongoose.Schema.Types.ObjectId, // Assuming CustomerId refers to a Customer document
+    type: mongoose.Schema.Types.ObjectId, 
     ref: 'Customer',
     required: true,
   },
   VehicleId: {
-    type: mongoose.Schema.Types.ObjectId, // Assuming VehicleId refers to a Vehicle document
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Vehicle',
     required: true,
   },
   RentalDuration: {
-    type: Number, // Duration in days or hours
+    type: Number, 
     required: true,
   },
   TotalSpent: {
     type: Number,
     required: true,
-    min: 0, // Ensures that TotalSpent is not negative
+    min: 0,
   },
   Date: {
     type: Date,
     required: true,
-    default: Date.now, // Automatically sets the date to the current date if not provided
+    default: Date.now, 
   },
 });
 

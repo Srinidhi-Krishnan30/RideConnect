@@ -1,8 +1,9 @@
+// 1. Package Imports and config
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel.js'); 
 require('dotenv').config({ path: '../../.env' });
 
-// Check whether token is present
+// 2. Verifying received token
 const authMiddleware = {
   verifyToken: async (req, res, next) => {
     try {
@@ -21,7 +22,7 @@ const authMiddleware = {
     }
   },
 
-// Rolechecking Middleware 
+// 3. Function to authorize a given role
   checkRole: (roles) => {
     return async (req, res, next) => {
       try {

@@ -1,25 +1,26 @@
+// 4. Schema to store reports of damages in vehicles
 const mongoose = require('mongoose');
 
 const damageReportSchema = new mongoose.Schema({
   ReportId: {
     type: String,
     required: true,
-    unique: true, // Ensures each ReportId is unique
+    unique: true, 
   },
   VehicleId: {
-    type: mongoose.Schema.Types.ObjectId, // Assuming VehicleId refers to a Vehicle document
+    type: mongoose.Schema.Types.ObjectId, 
     ref: 'Vehicle',
     required: true,
   },
   CustomerId: {
-    type: mongoose.Schema.Types.ObjectId, // Assuming CustomerId refers to a Customer document
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Customer',
     required: true,
   },
   ReportDate: {
     type: Date,
     required: true,
-    default: Date.now, // Automatically sets the date to the current date if not provided
+    default: Date.now,
   },
   DamageDescription: {
     type: String,
@@ -27,11 +28,10 @@ const damageReportSchema = new mongoose.Schema({
   },
   RepairStatus: {
     type: String,
-    enum: ['Pending', 'In Progress', 'Completed'], // Status options
-    default: 'Pending', // Default status is 'Pending'
+    enum: ['Pending', 'In Progress', 'Completed'], 
+    default: 'Pending', 
   },
 });
-
 const DamageReport = mongoose.model('DamageReport', damageReportSchema);
 
 module.exports = DamageReport;

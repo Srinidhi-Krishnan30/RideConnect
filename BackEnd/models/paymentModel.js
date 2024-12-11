@@ -1,3 +1,5 @@
+
+// 6. Schema to hold list of payments made associated with booking
 const mongoose = require('mongoose');
 
 const PaymentsSchema = new mongoose.Schema({

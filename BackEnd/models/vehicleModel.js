@@ -1,6 +1,5 @@
+// 12. Schema to hold vehicle information
 const mongoose = require('mongoose');
-
-// Vechicles collection schema
 const vehicleSchema = new mongoose.Schema({
   VehicleId: {
     type: String, 

@@ -1,5 +1,6 @@
+// 1. Imports and config
 const express = require('express');
-const Vehicle = require('../models/vehicleModel'); // Adjust the path based on your project structure
+const Vehicle = require('../models/vehicleModel');
 const router = express.Router();
 
 
@@ -77,7 +78,6 @@ router.get('/api/vehicles/search', async (req, res) => {
 });
 
 // 6. Searching based on status
-  
 router.get('/api/vehicles/status/:status', async (req, res) => {
     const { status } = req.params;
   

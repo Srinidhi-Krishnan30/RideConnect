@@ -1,15 +1,14 @@
+// 1. Package Imports and config
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+require('dotenv').config({ path: "../../.env" });
+const router = express.Router();
+const { verifyToken, checkRole } = require('../middleWare/authMiddleWare.js');
 const User = require("../models/userModel.js");
 
-require('dotenv').config({ path: "../../.env" });
 
-const router = express.Router();
-
-const { verifyToken, checkRole } = require('../middleWare/authMiddleWare.js');
-
-// User Registration Route
+// 2. User Registration Route
 router.post('/register', async (req, res) => {
   
   try {
@@ -30,11 +29,11 @@ router.post('/register', async (req, res) => {
 
     // Create new user
     const newUser = new User({
-      userId: `USER_${Date.now()}`, // Generate unique user ID
+      userId: `USER_${Date.now()}`, 
       username,
       email,
       passwordHash,
-      role: role || 'user', // Default to 'user' if no role specified
+      role: role || 'user',
       isActive: true
     });
 
@@ -48,27 +47,25 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ message: 'Registration error', error: error.message });
   }
 });
+
+// 3. Utility route get all users
 router.get('/getusers',async(req,res)=>{
   const users = await User.find();
   res.json(users);
 })
 
-// Login Route
+// 4. Login Route
 router.post('/login', async (req, res) => {
   try {
     const { username, password} = req.body;
-    // Find user
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
-
-    // Check password
     const isMatch = await bcrypt.compare(password, user.passwordHash);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
-
     // Check if user is active
     if (!user.isActive) {
       return res.status(403).json({ message: 'Account is not active' });
@@ -76,7 +73,7 @@ router.post('/login', async (req, res) => {
 
     console.log('User role before sending response:', user.role);
 
-    // Generate JWT
+    // Generate JWT and sign it
     const token = jwt.sign(
       { 
         id: user._id, 
@@ -87,7 +84,6 @@ router.post('/login', async (req, res) => {
       { expiresIn: '1h' }
     );
     
-     // Log token and user object being sent
      console.log('Generated token:', token);
      console.log('User object being sent:', {
        id: user._id, 
@@ -108,6 +104,5 @@ router.post('/login', async (req, res) => {
   }
 });
 
-console.log(process.env.JWT_SECRET);
 
 module.exports = router;

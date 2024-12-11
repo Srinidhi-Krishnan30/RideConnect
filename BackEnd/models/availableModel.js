@@ -1,3 +1,5 @@
+
+// 1. Schema to host list of currently available vehicles
 const mongoose = require('mongoose');
 
 const AvailabilitySchema = new mongoose.Schema({

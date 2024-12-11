@@ -1,3 +1,4 @@
+// 5. Schema to hold the list of notifications raised based on User ID
 const mongoose = require('mongoose');
 
 const NotificationsSchema = new mongoose.Schema({
